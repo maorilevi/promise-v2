@@ -1,4 +1,4 @@
-class PromiseV2 {
+class PromiseV2Async {
     /**
      * The constructor initializes the promise with an executor function and sets the initial state to 'pending'.
      * The executor is expected to handle asynchronous operations.
@@ -69,10 +69,10 @@ class PromiseV2 {
      * Returns a new promise for chaining.
      * @param {Function} [onFulfilled] - Callback for when the promise is fulfilled.
      * @param {Function} [onRejected] - Callback for when the promise is rejected.
-     * @returns {PromiseV2} - A new promise instance.
+     * @returns {PromiseV2Async} - A new promise instance.
      */
     then(onFulfilled, onRejected) {
-        return new PromiseV2((resolve, reject) => {
+        return new PromiseV2Async((resolve, reject) => {
             const handler = {
                 onFulfilled: (value) => {
                     try {
@@ -114,7 +114,7 @@ class PromiseV2 {
      * A shorthand for registering a rejection callback.
      * Equivalent to calling 'then' with 'null' as the first argument.
      * @param {Function} onRejected - Callback for when the promise is rejected.
-     * @returns {PromiseV2} - A new promise instance.
+     * @returns {PromiseV2Async} - A new promise instance.
      */
     catch(onRejected) {
         return this.then(null, onRejected);
@@ -123,7 +123,7 @@ class PromiseV2 {
     /**
      * Registers a callback to be executed when the promise settles, regardless of its outcome.
      * @param {Function} onFinally - Callback to be executed when the promise settles.
-     * @returns {PromiseV2} - A new promise instance.
+     * @returns {PromiseV2Async} - A new promise instance.
      */
     finally(onFinally) {
         return this.then(
@@ -142,3 +142,4 @@ class PromiseV2 {
         );
     }
 }
+module.exports = { PromiseV2Async };

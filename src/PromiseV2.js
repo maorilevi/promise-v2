@@ -36,12 +36,10 @@ class PromiseV2 {
         this.state = 'fulfilled';
         this.value = value;
 
-        queueMicrotask(() => {
-            this.handlers.forEach((handler) => {
-                if (handler.onFulfilled) {
-                    handler.onFulfilled(value);
-                }
-            });
+        this.handlers.forEach((handler) => {
+            if (handler.onFulfilled) {
+                handler.onFulfilled(value);
+            }
         });
     }
 
@@ -55,12 +53,10 @@ class PromiseV2 {
         this.state = 'rejected';
         this.value = reason;
 
-        queueMicrotask(() => {
-            this.handlers.forEach((handler) => {
-                if (handler.onRejected) {
-                    handler.onRejected(reason);
-                }
-            });
+        this.handlers.forEach((handler) => {
+            if (handler.onRejected) {
+                handler.onRejected(reason);
+            }
         });
     }
 
@@ -103,9 +99,9 @@ class PromiseV2 {
             if (this.state === 'pending') {
                 this.handlers.push(handler);
             } else if (this.state === 'fulfilled' && handler.onFulfilled) {
-                queueMicrotask(() => handler.onFulfilled(this.value));
+                handler.onFulfilled(this.value);
             } else if (this.state === 'rejected' && handler.onRejected) {
-                queueMicrotask(() => handler.onRejected(this.value));
+                handler.onRejected(this.value);
             }
         });
     }
@@ -142,3 +138,5 @@ class PromiseV2 {
         );
     }
 }
+
+module.exports = { PromiseV2 };
