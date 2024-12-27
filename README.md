@@ -26,8 +26,8 @@ The project includes example usage for both versions to showcase their functiona
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/maorilevi/promise-v2.git
+   cd promise-v2
    ```
 2. Install any dependencies if applicable (none required for this project).
 
